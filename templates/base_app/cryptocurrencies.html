@@ -1,0 +1,58 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+
+{% block cryptocurrencies_active %}active{% endblock %}
+
+
+{% block content %}
+    <table class="responsive-table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Symbol</th>
+            <th>Price</th>
+            <th>Percent change(1h)</th>
+            <th>Percent change(24h)</th>
+            <th>Percent change(7d)</th>
+            <th>Volume(24h)</th>
+            <th>Market Capital</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for data in coin_data %}
+            <tr>
+                <td>{{ data.name }}</td>
+                <td>{{ data.symbol }}</td>
+                <td>${{ data.price|floatformat:3 }}</td>
+                <td>{{ data.percent_change_1h }}%</td>
+                <td>{{ data.percent_change_24h }}%</td>
+                <td>{{ data.percent_change_7d }}%</td>
+                <td>${{ data.volume_24h|floatformat:3 }}</td>
+                <td>${{ data.market_cap|floatformat:3 }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% if coin_data.has_other_pages %}
+        <ul class="pagination">
+            {% if coin_data.has_previous %}
+                <li><a href="?page={{ coin_data.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+                <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in coin_data.paginator.page_range %}
+                {% if coin_data.number == i %}
+                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if coin_data.has_next %}
+                <li><a href="?page={{ coin_data.next_page_number }}">&raquo;</a></li>
+            {% else %}
+                <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+        </ul>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,9 @@
+{
+  "secret_key": "dreamcatcherit",
+  "db_name": "socialdb",
+  "db_user": "myuser",
+  "db_password": "user1234",
+  "internal_ip": "",
+  "email_host_user": "ditmail612@gmail.com",
+  "email_host_password":"ditmail1234"
+}

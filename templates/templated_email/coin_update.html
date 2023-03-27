@@ -1,0 +1,31 @@
+<p>Date: {{ date_today }}</p>
+<p>Hello <strong>{{ username }}</strong>,</p>
+<br>
+<p>Your coin updates,</p>
+<br>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Symbol</th>
+        <th>Price</th>
+        <th>Percent change 1h</th>
+        <th>Percent change 24h</th>
+        <th>Percent change 7d</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for data in coin_details %}
+        <tr>
+            <td>{{ data.name }}</td>
+            <td>{{ data.symbol }}</td>
+            <td>{{ data.price }}</td>
+            <td>{{ data.percent_change_1h }}</td>
+            <td>{{ data.percent_change_24h }}</td>
+            <td>{{ data.percent_change_7d }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<br>
+<strong>Thank you.</strong>

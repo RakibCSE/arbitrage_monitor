@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    {% block head %}{% endblock %}
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="Dreamcatcher IT">
+    <meta name="keyword" content="Application">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+
+    {# CSS Block #}
+    {% block css %} {% endblock %}
+</head>
+
+<body>
+
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper">
+            <div class="container">
+                <a class="brand-logo {% block home_active %} {% endblock %}" href="{% url 'base:home' %}">
+                    <img class="nav-logo" src="/static/images/trade-512.png" alt="logo">
+                </a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+                    <i class="material-icons">menu</i>
+                </a>
+                <ul class="right hide-on-med-and-down">
+                    <li class="{% block about_active %} {% endblock %}">
+                        <a href="{% url 'base:about' %}">About</a>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li>
+                            <a href="/accounts/logout/">Logout</a>
+                        </li>
+                        <li class="{% block profile_active %} {% endblock %}">
+                            <a href="{% url 'base:profile' user.id %}">Profile</a>
+                        </li>
+                    {% else %}
+                        <li class="{% block login_active %} {% endblock %}">
+                            <a href="{% url 'base:login' %}">Login</a>
+                        </li>
+                        <li class="{% block reg_active %} {% endblock %}">
+                            <a href="{% url 'base:register' %}">Register</a>
+                        </li>
+                    {% endif %}
+                        <li class="{% block cryptocurrencies_active %} {% endblock %}">
+                            <a href="{% url 'base:cryptocurrencies' %}">Cryptocurrencies</a>
+                        </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+<ul class="sidenav" id="mobile-demo">
+    <li>
+        <a href="{% url 'base:about' %}">About</a>
+    </li>
+    {% if request.user.is_authenticated %}
+        <li>
+            <a href="/accounts/logout/">Logout</a>
+        </li>
+        <li class="{% if nbar == 'home' %}active{% endif %}">
+            <a href="{% url 'base:profile' user.id %}">Profile</a>
+        </li>
+    {% else %}
+        <li>
+            <a href="{% url 'base:login' %}">Login</a>
+        </li>
+        <li>
+            <a href="{% url 'base:register' %}">Register</a>
+        </li>
+    {% endif %}
+        <li>
+            <a href="{% url 'base:cryptocurrencies' %}">Cryptocurrencies</a>
+        </li>
+</ul>
+
+
+{#Content Block#}
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+
+<script src="{% static "js/jquery-3.2.1.min.js" %}"></script>
+<script src="{% static "js/materialize.min.js" %}"></script>
+<script>
+    $(document).ready(function () {
+        $(".sidenav").sidenav();
+    });
+</script>
+
+{# JavaScript Block #}
+{% block js %} {% endblock %}
+
+</body>
+</html>

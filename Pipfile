@@ -1,0 +1,35 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+
+[packages]
+ipython = "==6.3.1"
+django-extensions = "==1.7.3"
+pyparsing = "==2.2.0"
+pytz = "==2017.2"
+uwsgi = "==2.0.13.1"
+werkzeug = "==0.11.11"
+django-debug-toolbar = "==1.9.1"
+backcall = "==0.1.0"
+decorator = "==4.3.0"
+ipython-genutils = "==0.2.0"
+jedi = "==0.12.0"
+parso = "==0.2.0"
+pexpect = "==4.5.0"
+pickleshare = "==0.7.4"
+prompt-toolkit = "==1.0.15"
+ptyprocess = "==0.5.2"
+pygments = "==2.2.0"
+simplegeneric = "==0.8.1"
+traitlets = "==4.3.2"
+wcwidth = "==0.1.7"
+django = "==1.11.6"
+django-allauth = "*"
+"psycopg2" = "*"
+whitenoise = "*"
+
+[requires]
+python_version = "3.5"

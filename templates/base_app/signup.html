@@ -1,0 +1,73 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+
+{% block title %}Signup{% endblock %}
+{% block reg_active %} active {% endblock %}
+
+{% block css %}
+    <style>
+        .row {
+            margin-bottom: 0px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class='col l4 m2'></div>
+        <form class="col l4 m8 s12" id="signup_form" enctype="multipart/form-data" method="post"
+              action="{% url 'account_signup' %}">
+            {% csrf_token %}
+            <h3 class="center blue-text text-darken-2" style="margin-bottom: 10px;">{% trans "Sign up" %}</h3>
+            <div class="row">
+                <div class="input-field col s12 m12">
+                    <input type="email" name="email" required id="id_email" class="validate"/>
+                    <label for="id_email">{% trans "Email address" %}</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12 m12">
+                    <select name="type" id="id_type" class="form-control mb-4">
+                        <option value="Student">Student</option>
+                        <option value="Teacher">Teacher</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12 m12">
+                    <input minlength="8" maxlength="16" type="password" name="password1"
+                           id="id_password1" class="form-control" required="required"
+                           area-describedby="password_help_block"/>
+                    <label for="id_password1">{% trans "Password" %}</label>
+                    <small id="password_help_block" class="materialize-red-text">
+                        {% trans "Password must be 8 to 16 digits long" %}
+                    </small>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12 m12">
+                    <input minlength="8" maxlength="16" type="password" name="password2"
+                           id="id_password2" class="form-control mb-4" required="required"/>
+                    <label for="id_password2">{% trans "Password (again)" %}</label>
+                </div>
+
+            </div>
+
+            <button class="primaryAction btn btn-block" type="submit">{% trans "Sign up" %}&raquo;</button>
+            <p>Already have an account? Then please <a href="{% url 'base:login' %}">{% trans "Log in" %}</a>.</p>
+        </form>
+        <div class='col l4 m2'></div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function () {
+            $('select').formSelect();
+        });
+    </script>
+{% endblock %}

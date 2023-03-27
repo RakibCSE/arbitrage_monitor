@@ -1,0 +1,27 @@
+{% extends 'base/base.html' %}
+{% load i18n %}
+
+{% block profile_active %} active {% endblock %}
+
+{# Profile Body #}
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {% if message.tags == "warning" %}
+                    <strong>{{ message.tags.title }}!</strong> {{ message }}
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <img class="img-thumbnail" src="{{ user_object.profile.profile_picture.url }}" alt="Profile Picture" height="150"
+         width="150">
+    <h1>{{ user.get_full_name }}</h1>
+    <p>{{ user_object.extendsignup.type }}</p>
+    <hr>
+    <p><b>Username: </b>{{ user.username }}</p>
+    <p><b>Email: </b>{{ user.email }}</p>
+    <p><b>Address: </b>{{ user.profile.address }}</p>
+    <p><b>City: </b>{{ user.profile.city }}</p>
+    <a class="btn btn-primary" href="{% url "base:update" %}">{% trans "Edit profile" %}</a>
+{% endblock %}

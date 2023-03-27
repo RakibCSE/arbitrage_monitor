@@ -1,0 +1,17 @@
+.container {
+    width: 85%;
+}
+
+.nav-logo {
+    position: inherit;
+    height: 60px;
+    width: 60px;
+}
+
+.signin_with_icon {
+    padding: 30px;
+}
+
+.col.s12 > .btn {
+   width: 100%;
+}

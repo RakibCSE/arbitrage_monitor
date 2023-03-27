@@ -1,0 +1,88 @@
+{% extends "base/base.html" %}
+
+{% load i18n %}
+{% load socialaccount %}
+{% load account socialaccount %}
+{% load static %}
+{% providers_media_js %}
+
+{% block title %} Sign In{% endblock %}
+{% block login_active %} active {% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col l4 m2"></div>
+        <form class="col l4 m8 s12" method="POST" action="{% url 'account_login' %}">
+            {% csrf_token %}
+
+            <h3 class="center blue-text text-darken-2" style="margin-bottom: 20px;">{% trans "Sign in" %}</h3>
+
+            {% if form.errors %}
+                <div class="row">
+                    <div class="s12">
+                        <div class="red-text text-darken-2">
+                            <span>{% trans "Username or password are not correct" %}</span>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="row">
+                <div class="input-field col s12 m12">
+                    <input id="id_login" type="text" name="login" class="validate"
+                           autofocus="autofocus" required="required"/>
+                    <label for="id_login">{% trans "Username or email" %}</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12 m12">
+                    <input id="id_password" type="password" name="password" class="validate"
+                           minlength="8" maxlength="16" required="required"/>
+                    <label for="id_password">{% trans "Password" %}</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col left">
+                    <label for="id_remember">
+                        <input type="checkbox" id="id_remember" name="remember">
+                        <span>{% trans "Remember me" %}</span>
+                    </label>
+                </div>
+                <div class="col right">
+                    <a href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                </div>
+            </div>
+
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+            {% endif %}
+            <div class="row">
+                <div class="col s12">
+                    <button class="btn purple darken-2" type="submit">{% trans "Sign in" %}</button>
+                </div>
+            </div>
+
+            <p class="center">
+                {% blocktrans %}
+                Not a member?
+                <a href="{% url 'base:register' %}">Register</a>
+                {% endblocktrans %}
+            </p>
+            <!-- Social login -->
+            <p class="center">{% trans "or sign in with:" %}</p>
+            <div class="row center">
+                <a class="signin_with_icon" href="{% provider_login_url 'facebook' process='login' %}">
+                    <i class="fa fa-2x fa-facebook"></i>
+                </a>
+                <a class="signin_with_icon" href="{% provider_login_url 'google' process='login' %}">
+                    <i class="fa fa-2x fa-google"></i>
+                </a>
+                <a class="signin_with_icon" href="{% provider_login_url 'linkedin' process='login' %}">
+                    <i class="fa fa-2x fa-linkedin"></i>
+                </a>
+            </div>
+        </form>
+        <div class="col l4 m2"></div>
+    </div>
+{% endblock %}

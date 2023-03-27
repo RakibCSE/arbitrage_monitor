@@ -1,0 +1,55 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+    {#    {% if user.is_anonymous %}#}
+    {#        <img class="responsive-img" src="media/profile_picture/None/social-media.jpg" style="margin-top: auto;">#}
+    {#    {% elif user and not user.is_anonymous %}#}
+    {#        <form action="{% url "base:home" %}" method="GET">#}
+    {#            <div class="row">#}
+    {#                <div class="input-field col l3 m5 s5">#}
+    {#                    <select id="coins_dropdown" name="coin_choices" multiple="multiple">#}
+    {#                        <option value="" disabled selected>Choose coin preferences</option>#}
+    {#                        {% for name in name_list %}#}
+    {#                            <option value="{{ name }}">{{ name }}</option>#}
+    {#                        {% endfor %}#}
+    {#                    </select>#}
+    {#                </div>#}
+    {#                <div class="input-field col">#}
+    {#                    <input class="btn btn-block" type="submit" value="Submit">#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </form>#}
+    {#    {% endif %}#}
+
+    {% for data in latest_news %}
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="{{ data.image_url }}">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">{{ data.title }}<i
+                                class="material-icons right">more_vert</i></span>
+                        <p><a href="{{ data.url }}">{% trans "Read more" %}</a></p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">{{ data.title }}<i
+                                class="material-icons right">close</i></span>
+                        <p>{{ data.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{#{% block js %}#}
+{#    <script>#}
+{#        $(document).ready(function () {#}
+{#            $('select').formSelect();#}
+{#        });#}
+{#    </script>#}
+{#{% endblock %}#}
